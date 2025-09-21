@@ -55,7 +55,7 @@ const (
 )
 ```
 
-## Always reset the ternal is you use color for you output heiglighting like this
+## Always reset the terminal after you use tcolor.anyColor using tcolor.reset like this
 ```go
 package main
 import "fmt"

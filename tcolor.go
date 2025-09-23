@@ -5,61 +5,66 @@ import (
 )
 
 const (
-	Reset = "\033[0m"
+	Reset Color = "\033[0m"
 
 	// Foreground Colors
-	Red     = "\033[31m"
-	Green   = "\033[32m"
-	Yellow  = "\033[33m"
-	Blue    = "\033[34m"
-	Magenta = "\033[35m"
-	Cyan    = "\033[36m"
-	Gray    = "\033[37m"
-	White   = "\033[97m"
+	Black   Color = "\033[30m"
+	Red     Color = "\033[31m"
+	Green   Color = "\033[32m"
+	Yellow  Color = "\033[33m"
+	Blue    Color = "\033[34m"
+	Magenta Color = "\033[35m"
+	Cyan    Color = "\033[36m"
+	Gray    Color = "\033[37m"
+	White   Color = "\033[97m"
 
 	// Blod Foreground Colors
-	BlodRed     = "\033[31;1m"
-	BlodGreen   = "\033[32;1m"
-	BlodYellow  = "\033[33;1m"
-	BlodBlue    = "\033[34;1m"
-	BlodMagenta = "\033[35;1m"
-	BlodCyan    = "\033[36;1m"
-	BlodGray    = "\033[37;1m"
-	BlodWhite   = "\033[97;1m"
+	BlodRed     Color = "\033[31;1m"
+	BlodGreen   Color = "\033[32;1m"
+	BlodYellow  Color = "\033[33;1m"
+	BlodBlue    Color = "\033[34;1m"
+	BlodMagenta Color = "\033[35;1m"
+	BlodCyan    Color = "\033[36;1m"
+	BlodGray    Color = "\033[37;1m"
+	BlodWhite   Color = "\033[97;1m"
 
 	// Background Colors
-	BgRed     = "\033[41m"
-	BgGreen   = "\033[42m"
-	BgYellow  = "\033[43m"
-	BgBlue    = "\033[44m"
-	BgMagenta = "\033[45m"
-	BgCyan    = "\033[46m"
-	BgGray    = "\033[47m"
-	BgWhite   = "\033[107m"
+	BgRed     Color = "\033[41m"
+	BgGreen   Color = "\033[42m"
+	BgYellow  Color = "\033[43m"
+	BgBlue    Color = "\033[44m"
+	BgMagenta Color = "\033[45m"
+	BgCyan    Color = "\033[46m"
+	BgGray    Color = "\033[47m"
+	BgWhite   Color = "\033[107m"
 )
 
-// take error msg and print that
-func ErrorMsg(errMsg error) {
-	fmt.Printf("%s%s%s \n", BlodRed, errMsg, Reset)
+type Color string
+
+func (c Color) String() string {
+	return string(c)
 }
 
-// return error msg as string
-func SerrorMsg(errMsg error) string {
-	if errMsg != nil {
-		return fmt.Sprintf("%s%s%s", BlodRed, errMsg, Reset)
-	}
-	return ""
+func (c Color) With(str string) string {
+	return fmt.Sprintf("%s%s%s", c, str, Reset)
 }
 
-// Print massage. takes color or background and string
-func PrintMsg(code, str string) {
-	fmt.Printf("%s%s%s \n", code, str, Reset)
+// takes a string with foreground and a background color and transfrom it.
+func Colorize(frColor, bgColor Color, str string) string {
+	return fmt.Sprintf("%s%s%s%s", frColor, bgColor, str, Reset)
 }
 
-// return massage as string. takes color or background and string
-func SprintMsg(code, str string) string {
-	if code == "" || str == "" {
-		return str
-	}
-	return fmt.Sprintf("%s%s%s", code, str, Reset)
+// Print an error massage with Blod red color
+func ErrorMsg(err error) {
+	fmt.Printf("%s%s%s \n", BlodRed, err.Error(), Reset)
+}
+
+// Take a massage & foreground with background color for the massage and print that
+func Println(frColor, bgColor Color, str string) {
+	fmt.Printf("%s%s%s%s \n", frColor, bgColor, str, Reset)
+}
+
+// Take a massage & foreground with background color for the massage. and return a customized string.
+func Sprintf(frColor, bgColor Color, str string, a ...any) string {
+	return fmt.Sprintf("%s%s%s%s", frColor, bgColor, fmt.Sprint(str, a), Reset)
 }

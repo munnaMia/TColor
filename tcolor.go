@@ -2,10 +2,12 @@ package tcolor
 
 import (
 	"fmt"
+	"os"
 )
 
 const (
 	Reset Color = "\033[0m"
+	None  Color = ""
 
 	// Foreground Colors
 	Black   Color = "\033[30m"
@@ -54,9 +56,10 @@ func Colorize(frColor, bgColor Color, str string) string {
 	return fmt.Sprintf("%s%s%s%s", frColor, bgColor, str, Reset)
 }
 
-// Print an error massage with Blod red color
+// Print an error massage with Blod red color and exit with status 1
 func ErrorMsg(err error) {
 	fmt.Printf("%s%s%s \n", BlodRed, err.Error(), Reset)
+	os.Exit(1)
 }
 
 // Take a massage & foreground with background color for the massage and print that
@@ -65,6 +68,6 @@ func Println(frColor, bgColor Color, str string) {
 }
 
 // Take a massage & foreground with background color for the massage. and return a customized string.
-func Sprintf(frColor, bgColor Color, str string, a ...any) string {
-	return fmt.Sprintf("%s%s%s%s", frColor, bgColor, fmt.Sprint(str, a), Reset)
+func Sprintf(frColor, bgColor Color, format string, a ...any) string {
+	return fmt.Sprintf("%s%s%s%s", frColor, bgColor, fmt.Sprintf(format, a...), Reset)
 }

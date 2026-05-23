@@ -21,14 +21,14 @@ const (
 	White   Color = "\033[97m"
 
 	// Blod Foreground Colors
-	BlodRed     Color = "\033[31;1m"
-	BlodGreen   Color = "\033[32;1m"
-	BlodYellow  Color = "\033[33;1m"
-	BlodBlue    Color = "\033[34;1m"
-	BlodMagenta Color = "\033[35;1m"
-	BlodCyan    Color = "\033[36;1m"
-	BlodGray    Color = "\033[37;1m"
-	BlodWhite   Color = "\033[97;1m"
+	BoldRed     Color = "\033[31;1m"
+	BoldGreen   Color = "\033[32;1m"
+	BoldYellow  Color = "\033[33;1m"
+	BoldBlue    Color = "\033[34;1m"
+	BoldMagenta Color = "\033[35;1m"
+	BoldCyan    Color = "\033[36;1m"
+	BoldGray    Color = "\033[37;1m"
+	BoldWhite   Color = "\033[97;1m"
 
 	// Background Colors
 	BgRed     Color = "\033[41m"
